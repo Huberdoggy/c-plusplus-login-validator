@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+
 using namespace std;
 
 bool isLoggedIn()
@@ -12,6 +13,7 @@ bool isLoggedIn()
 bool createCredFile()
 {
 	try {
+		system("clear");
 		string username, password;
 		cout << "Select a username: ";
 		cin >> username;
@@ -22,6 +24,8 @@ bool createCredFile()
 		file << username << "\n" << password;
 		file.close();
 		cout << "\nThanks! You're all set to log in now." << endl;
+		system("sleep 2");
+		system("clear");
 		return true;
 	} catch (const exception &e) {
 		cerr << e.what() << '\n';
@@ -31,11 +35,12 @@ bool createCredFile()
 
 int main()
 {
-	// Initial input to correspond to menu case opts
+	//  Initial input to correspond to menu case opts
 	int choice;
 	bool onCreate = false, validFile = false;
 	string _registeredUname, _registeredPword, regU, regP;
-	cout << "1. Register\n2. Login\nYour choice? => ";
+	cout << "=================WELCOME=================" << endl;
+	cout << "\n\n1. Register\n2. Login\n3. Quit\n\nYour choice? => ";
 	cin >> choice;
 	switch (choice) {
 	case 1:
@@ -49,12 +54,14 @@ int main()
 		    isLoggedIn(); // Expect fail if user attempts to select opt
 				  // 2 right away - no such file
 		if (validFile) {
+			system("sleep 2");
+			system("clear");
 			cout << "Okay, please enter the username you used "
 				"during registration => ";
 			cin >> _registeredUname;
 			cout << "And now your password please => ";
 			cin >> _registeredPword;
-
+			system("sleep 2");
 			ifstream read("creds.txt");
 			getline(read, regU);
 			getline(read, regP);
@@ -65,14 +72,18 @@ int main()
 			} else {
 				cout << "\nBAD LOGIN";
 			}
+			break;
 		} else {
 			cout
 			    << "Looks like you still need to register.\nPlease "
 			       "do so, and then select this option again."
 			    << endl;
-			cout << "\n\n";
+			system("sleep 2");
+			system("clear");
 			main(); // Run it from the top...
 		}
+	case 3:
+		break;
 	default:
 		break;
 	}
