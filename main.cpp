@@ -1,5 +1,4 @@
-#include <fstream>
-#include <iostream>
+#include "common_nix.h"
 
 using namespace std;
 
